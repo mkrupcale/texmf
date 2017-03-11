@@ -54,11 +54,6 @@
 \def\@email{\PackageWarning{anstrans}{No email address has been defined.}}
 \newcommand{\email}[1]{\def\@email{#1}\@emaildefinedtrue}
 
-\newif\if@disclaimerdefined
-\@disclaimerdefinedfalse
-\def\@disclaimer{}
-\newcommand{\disclaimer}[1]{\def\@disclaimer{#1}\@disclaimerdefinedtrue}
-
 %%%%%%%%%%% PARAGRAPH FORMATTING %%%%%%%%%%%
 \setlength{\parindent}{0.25in}
 
@@ -151,10 +146,12 @@
 %%%% Title section
 \setlength{\stripsep}{0pt}
 \renewcommand{\maketitle}{%
+  \begingroup
+  \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
   \begin{strip}%
     \centering%
       %title
-      {\bf \@title\if@disclaimerdefined{\footnotemark[1]{}}\fi}
+      {\bf \@title}
       \vspace{.75\baselineskip}%
 
       %author
@@ -174,8 +171,8 @@
 
   \end{strip}%
 
-  %disclaimer
-  \if@disclaimerdefined%
-  {\footnotetext[1]{\footnotesize \@disclaimer}}%
-  \fi
+  % title footnotes
+  \@thanks
+  \endgroup
+  \setcounter{footnote}{0}%
 }
