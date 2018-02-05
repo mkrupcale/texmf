@@ -1,0 +1,62 @@
+% SPDX-License-Identifier: (LPPL-1.3c+ OR GPL-2.0+)
+%
+% Copyright 2018 by Matthew Krupcale
+%
+
+\mode<presentation>
+
+\usepackage{tikz} % for footline decoration
+\usepackage{calc} % for footline decoration length calculation
+
+% remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+\newlength{\backgroundcvtlogoheight}
+\setlength{\backgroundcvtlogoheight}{0.72\paperheight} % 0.72 = 5.4 in / 7.5 in approximate fractional height from original template
+
+% background image
+\setbeamertemplate{background}{
+  \vbox to \paperheight{%
+    \vfil\hbox to \paperwidth{%
+      \hfil\includegraphics[height=\backgroundcvtlogoheight]{CVT/CVT_logo_fit_4pct_opacity}\hfil%
+    }\vfil%
+  }
+}
+
+\newlength{\footlinecvtlogowidth}
+\newlength{\footlinecvtlogoheight}
+\newlength{\footlinecvtbannerwidth}
+\newlength{\footlinecvtbannerheight}
+\newlength{\footlinennsalogowidth }
+\newlength{\footlinennsalogoheight}
+\newlength{\footlinennsalogoxmargin}
+\newlength{\footlinetikzbottomskip}
+\setlength{\footlinecvtlogoheight}{0.089\paperheight} % 0.089 = 0.67 in / 7.5 in fractional height from original template
+\setlength{\footlinecvtlogowidth}{\footlinecvtlogoheight}
+\setlength{\footlinecvtbannerheight}{0.5\footlinecvtlogoheight}
+\setlength{\footlinecvtbannerwidth}{0.83\paperwidth}
+\setlength{\footlinennsalogoheight}{0.95\footlinecvtbannerheight}
+\pgfdeclareimage[height=\footlinennsalogoheight]{footlinennsalogo}{DOE/NNSA_Logo}
+\settowidth{\footlinennsalogowidth}{\pgfuseimage{footlinennsalogo}}
+\setlength{\footlinennsalogoxmargin}{\paperwidth-\footlinennsalogowidth-\footlinecvtbannerwidth-0.5\footlinecvtlogowidth-0.3333em} % 0.3333em = default inner xsep which is left of CVT logo
+\setlength{\footlinetikzbottomskip}{0.5\footlinecvtlogoheight-0.5\footlinecvtbannerheight}
+
+\defbeamertemplate*{footline}{CVT}
+{%
+  \begin{tikzpicture}%
+    \node[fill=beamer@blendedblue,text=white,align=left,outer sep=0pt,inner xsep=0pt,text width=\footlinecvtbannerwidth,minimum height=\footlinecvtbannerheight,anchor=west] at (0,0) {\hspace{\footlinecvtlogowidth}Consortium for Verification Technology};
+    \node at (0,0) {\includegraphics[height=\footlinecvtlogoheight]{CVT/CVT_logo_fit}};
+    \node[right=0.5\footlinennsalogoxmargin,outer sep=0pt,inner xsep=0pt] at (\footlinecvtbannerwidth,0) {\pgfuseimage{footlinennsalogo}};
+  \end{tikzpicture}
+  % Move tikzpicture downward relative to frame numbers
+  \nobreak\vskip-\footlinetikzbottomskip\nobreak
+  % Centered frame numbers
+  \hfil%
+  \usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertframenumber\,/\,\inserttotalframenumber%
+  \hfil\vskip2pt%
+}
+
+\mode
+<all>
