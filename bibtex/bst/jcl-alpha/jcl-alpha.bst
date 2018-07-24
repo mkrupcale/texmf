@@ -1298,8 +1298,8 @@ FUNCTION {initialize.et.al.char.used}
 EXECUTE {initialize.et.al.char.used}
 FUNCTION {format.lab.names}
 { 's :=
-  s #1 "{v{}}{l{}}" format.name$
-  duplicate$ text.length$ #2 <
+  s #1 "{v{}}" format.name$ s #1 "{ll}" format.name$ #2 text.prefix$ *
+  duplicate$ text.length$ #3 <
     { pop$ s #1 "{ll}" format.name$ #3 text.prefix$ }
       'skip$
     if$
