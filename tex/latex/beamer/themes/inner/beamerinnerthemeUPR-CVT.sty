@@ -1,0 +1,59 @@
+% SPDX-License-Identifier: (LPPL-1.3c+ OR GPL-2.0+)
+%
+% Copyright 2007 by Till Tantau
+% Copyright 2019 by Matthew Krupcale
+%
+
+\mode<presentation>
+
+\titlegraphic{\includegraphics[width=\textwidth]{DOE/NNSA_DOE_UPR_title_slide_image}}
+
+\date{} % reset date for title page
+% Title page: derived from beamerinnerthemedefault.sty
+% - add context (i.e. NNSA sponsor and meeting)
+% - do not insert date if not provided (default uses \today)
+% - insert consortium
+% - move authors and institute to end
+\defbeamertemplate*{title page}{UPR-CVT}[1][]
+{
+  \vbox{}
+  \vfill
+  \begingroup
+    \centering
+    \vskip-1em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+    \vskip0.1em
+    \begin{beamercolorbox}[sep=8pt,center,#1]{context}
+      {\usebeamerfont{title}\usebeamercolor[fg]{title slide nnsa office}Office of Nonproliferation and Verification Research and Development}\par%
+      \usebeamerfont{subtitle}University Program Review (UPR) 2019 Meeting%
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=6pt,center,#1]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+    \end{beamercolorbox}%
+    \vskip0.25em\par
+    \begin{beamercolorbox}[sep=6pt,center,#1]{consortium}
+      \usebeamerfont{institute}Consortium for Verification Technology
+    \end{beamercolorbox}
+    \ifx\insertdate\@empty%
+    \else%
+      \begin{beamercolorbox}[sep=6pt,center,#1]{date}
+        \usebeamerfont{date}\insertdate
+      \end{beamercolorbox}
+    \fi%
+    \begin{beamercolorbox}[sep=6pt,center,#1]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=6pt,center,#1]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+  \endgroup
+  \vfill
+}
+
+\mode
+<all>

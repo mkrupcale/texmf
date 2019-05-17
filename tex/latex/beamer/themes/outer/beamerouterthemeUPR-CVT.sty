@@ -1,0 +1,144 @@
+% SPDX-License-Identifier: (LPPL-1.3c+ OR GPL-2.0+)
+%
+% Copyright 2007 by Till Tantau
+% Copyright 2012,2015 by Vedran Mileti\'c, Joseph Wright
+% Copyright 2017,2018 by Louis Stuart, Joseph Wright
+% Copyright 2019 by Matthew Krupcale
+%
+
+\mode<presentation>
+
+\usepackage{tikz} % for footline decoration
+\usepackage{calc} % for footline decoration length calculation
+
+\newlength{\backgroundcvtlogoheight}
+\setlength{\backgroundcvtlogoheight}{0.72\paperheight} % 0.72 = 5.4 in / 7.5 in approximate fractional height from original template
+
+% background image
+\setbeamertemplate{background}{
+  \def\beamerbg@temp{Acknowledgements}
+  \ifx\beamer@frametitle\beamerbg@temp%
+    \vbox to \paperheight{%
+      \vfil\hbox to \paperwidth{%
+        \hfil\includegraphics[height=\backgroundcvtlogoheight]{CVT/CVT_logo_fit_4pct_opacity}\hfil%
+      }\vfil%
+    }
+  \else%
+  \fi
+}
+
+\newlength{\bannerseparatorheight}
+\setlength{\bannerseparatorheight}{0.008\paperheight} % 0.008 = 0.06 in / 7.5 in fractional height from original template
+
+% headline
+
+\newlength{\headlinedoelogowidth}
+\newlength{\headlinedoelogoheight}
+\newlength{\headlinennsalogowidth}
+\newlength{\headlinennsalogoheight}
+\newlength{\headlinexmargin}
+\newlength{\headlineymargin}
+\newlength{\headlinetikzbottomskip}
+
+\setlength{\headlinedoelogowidth}{0.075\paperwidth} % 0.075 = 0.75 in / 10.0 in fractional width from original template
+\setlength{\headlinedoelogoheight}{\headlinedoelogowidth}
+\setlength{\headlinennsalogowidth}{0.175\paperwidth} % 0.175 = 1.75 in / 10.0 in fractional width from original template
+\pgfdeclareimage[width=\headlinennsalogowidth]{headlinennsalogo}{DOE/NNSA_Logo}
+\settoheight{\headlinennsalogoheight}{\pgfuseimage{headlinennsalogo}}
+\setlength{\headlinexmargin}{0.23567869em} % 0.3333em * sqrt(2) = default inner xsep which is left of CVT logo
+\setlength{\headlineymargin}{0.23567869em}
+\setlength{\headlinetikzbottomskip}{\headlinedoelogoheight+2\headlineymargin}
+
+\defbeamertemplate*{headline}{UPR-CVT}
+{%
+  \ifx\beamer@frametitle\@empty%
+  \else%
+    \begin{tikzpicture}%
+      \node[inner xsep=\headlinexmargin] at (0,0) {\includegraphics[height=\headlinedoelogoheight]{DOE/Seal_of_the_United_States_Department_of_Energy_(shaded)}};
+      \node[inner xsep=\headlinexmargin,anchor=east] at (\paperwidth-0.5\headlinedoelogowidth-\headlinexmargin, 0) {\pgfuseimage{headlinennsalogo}};
+    \end{tikzpicture}
+    % Move tikzpicture downward relative to frame
+    \nobreak\vskip-\headlinetikzbottomskip\nobreak
+  \fi
+}
+
+\newlength{\frametitlewidth}
+\newlength{\headlinedoelogotextoverlap}
+
+\setlength{\headlinedoelogotextoverlap}{\headlinexmargin+\headlinedoelogowidth-\beamer@leftmargin}
+\setlength{\frametitlewidth}{\paperwidth-\headlinedoelogowidth-\headlinennsalogowidth-2\headlinexmargin}
+
+% frametitle
+
+% Frame title: derived from beamerouterthemedefault.sty
+% - add banner separator
+% - decrease width of frame title area
+\defbeamertemplate*{frametitle}{UPR-CVT}[1][left]
+{%
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \hskip\headlinedoelogotextoverlap%
+  \@tempdima=\frametitlewidth%
+  %\advance\@tempdima by\beamer@leftmargin%
+  %\advance\@tempdima by\beamer@rightmargin%
+  \begin{beamercolorbox}[sep=0.3cm,#1,wd=\the\@tempdima]{frametitle}
+    \usebeamerfont{frametitle}%
+    \vbox{}\vskip-1ex%
+    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+    \strut\insertframetitle\strut\par%
+    {%
+      \ifx\insertframesubtitle\@empty%
+      \else%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
+    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+  \end{beamercolorbox}%
+}
+
+% center frame title
+%\setbeamertemplate{frametitle}[UPR-CVT][center]
+
+% footline
+
+\newlength{\footlinecvtlogowidth}
+\newlength{\footlinecvtlogoheight}
+\newlength{\footlineinstitutelogowidth}
+\newlength{\footlineinstitutelogoheight}
+\newlength{\footlinexmargin}
+\newlength{\footlineymargin}
+\newlength{\footlinetikzbottomskip}
+\setlength{\footlinecvtlogoheight}{0.089\paperheight} % 0.089 = 0.67 in / 7.5 in fractional height from original template
+\setlength{\footlinecvtlogowidth}{\footlinecvtlogoheight}
+\setlength{\footlineinstitutelogoheight}{\footlinecvtlogoheight}
+\pgfdeclareimage[height=\footlineinstitutelogoheight]{footlineinstitutelogo}{figures/2color-bluebg}
+\settowidth{\footlineinstitutelogowidth}{\pgfuseimage{footlineinstitutelogo}}
+\setlength{\footlinexmargin}{0.23567869em} % 0.3333em * sqrt(2) = default inner xsep which is left of CVT logo
+\setlength{\footlineymargin}{0.23567869em}
+\setlength{\footlinetikzbottomskip}{0.5\footlinecvtlogoheight-\footlineymargin}
+
+\defbeamertemplate*{footline}{UPR-CVT}
+{%
+  \def\beameracknowledgements@temp{Acknowledgements}
+  \ifx\beamer@frametitle\beameracknowledgements@temp%
+  \else%
+    \begin{tikzpicture}%
+      \node at (0,0) {\includegraphics[height=\footlinecvtlogoheight]{CVT/CVT_logo_fit}};
+      \node[anchor=west] at (0.5\footlinecvtlogowidth, 0) {\pgfuseimage{footlineinstitutelogo}};
+    \end{tikzpicture}
+    % Move tikzpicture downward relative to frame numbers
+    \nobreak\vskip-\footlinetikzbottomskip\nobreak
+  \fi%
+  % Right-aligned frame numbers
+  \hfill%
+  \usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertframenumber\,/\,\inserttotalframenumber%
+  \hspace*{\footlinexmargin}\vskip2pt%
+}
+
+% remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+\mode
+<all>
